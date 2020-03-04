@@ -24,24 +24,69 @@ public class TennisGameImpl implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        if (player1Score == player2Score) {
-            score = player1Score > 2 ? "Deuce" : getScoreName(player1Score) + "-All";
-        } else if (player1Score >= 4 || player2Score >= 4) {
-            int minusResult = player1Score - player2Score;
-            if (minusResult == 1) {
-                score = "Advantage " + player1Name;
-            } else if (minusResult == -1) {
-                score = "Advantage " + player2Name;
-            } else if (minusResult >= 2) {
-                score = "Win for " + player1Name;
-            } else {
-                score = "Win for " + player2Name;
-            }
-        } else {
-            score = getScoreName(player1Score) + "-" + getScoreName(player2Score);
+        if (isTied()) {
+            return scoreForTied();
         }
-        return score;
+        if (isAtLeastOneScoreAbove4Points()) {
+            return scoreForAtLeastOneScoreAbove4Points();
+        }
+        return scoreForBothBelow4Points();
+    }
+
+    private String scoreForBothBelow4Points() {
+        return getScoreName(player1Score) + "-" + getScoreName(player2Score);
+    }
+
+    private String scoreForAtLeastOneScoreAbove4Points() {
+        if (doesPlayer1HaveAdvantage()) {
+            return scoreForAdvantage(player1Name);
+        }
+        if (doesPlayer2HasAdvantage()) {
+            return scoreForAdvantage(player2Name);
+        }
+        if (doesPlayer1Win()) {
+            return scoreForWin(player1Name);
+        }
+        if (doesPlayer2Win()) {
+            return scoreForWin(player2Name);
+        }
+        return "";
+    }
+
+    private String scoreForTied() {
+        return player1Score > 2 ? "Deuce" : getScoreName(player1Score) + "-All";
+    }
+
+    private boolean doesPlayer2Win() {
+        return player2Score - player1Score >= 2;
+    }
+
+    private boolean doesPlayer1Win() {
+        return player1Score - player2Score >= 2;
+    }
+
+    private boolean doesPlayer2HasAdvantage() {
+        return player1Score - player2Score == -1;
+    }
+
+    private boolean doesPlayer1HaveAdvantage() {
+        return player1Score - player2Score == 1;
+    }
+
+    private boolean isAtLeastOneScoreAbove4Points() {
+        return player1Score >= 4 || player2Score >= 4;
+    }
+
+    private boolean isTied() {
+        return player1Score == player2Score;
+    }
+
+    private String scoreForWin(String playerName) {
+        return "Win for " + playerName;
+    }
+
+    private String scoreForAdvantage(String playerName) {
+        return "Advantage " + playerName;
     }
 
     private String getScoreName(int score) {
