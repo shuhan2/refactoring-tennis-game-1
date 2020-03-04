@@ -27,17 +27,6 @@ public class TennisGameImpl implements TennisGame {
         if (isTied()) {
             return scoreForTied();
         }
-        if (isAtLeastOneScoreAbove4Points()) {
-            return scoreForAtLeastOneScoreAbove4Points();
-        }
-        return scoreForBothBelow4Points();
-    }
-
-    private String scoreForBothBelow4Points() {
-        return getScoreName(player1Score) + "-" + getScoreName(player2Score);
-    }
-
-    private String scoreForAtLeastOneScoreAbove4Points() {
         if (doesPlayer1HaveAdvantage()) {
             return scoreForAdvantage(player1Name);
         }
@@ -50,27 +39,31 @@ public class TennisGameImpl implements TennisGame {
         if (doesPlayer2Win()) {
             return scoreForWin(player2Name);
         }
-        return "";
+        return scoreForBothBelow4Points();
+    }
+
+    private boolean doesPlayer2Win() {
+        return isAtLeastOneScoreAbove4Points() && player2Score - player1Score >= 2;
+    }
+
+    private boolean doesPlayer1Win() {
+        return isAtLeastOneScoreAbove4Points() && player1Score - player2Score >= 2;
+    }
+
+    private boolean doesPlayer2HasAdvantage() {
+        return isAtLeastOneScoreAbove4Points() && player1Score - player2Score == -1;
+    }
+
+    private boolean doesPlayer1HaveAdvantage() {
+        return isAtLeastOneScoreAbove4Points() && player1Score - player2Score == 1;
+    }
+
+    private String scoreForBothBelow4Points() {
+        return getScoreName(player1Score) + "-" + getScoreName(player2Score);
     }
 
     private String scoreForTied() {
         return player1Score > 2 ? "Deuce" : getScoreName(player1Score) + "-All";
-    }
-
-    private boolean doesPlayer2Win() {
-        return player2Score - player1Score >= 2;
-    }
-
-    private boolean doesPlayer1Win() {
-        return player1Score - player2Score >= 2;
-    }
-
-    private boolean doesPlayer2HasAdvantage() {
-        return player1Score - player2Score == -1;
-    }
-
-    private boolean doesPlayer1HaveAdvantage() {
-        return player1Score - player2Score == 1;
     }
 
     private boolean isAtLeastOneScoreAbove4Points() {
