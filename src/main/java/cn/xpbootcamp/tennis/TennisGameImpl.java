@@ -35,6 +35,6 @@ public class TennisGameImpl implements TennisGame {
         if (regularLandScore.isApplied()) {
             return regularLandScore.state();
         }
-        return "";
+        return new EmptyScore(player1, player2).state();
     }
 }
