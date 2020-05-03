@@ -12,6 +12,14 @@ public enum  AdvantageScore {
     this.score = score;
   }
 
+  public static AdvantageScore ofDifferValue(int differValue) {
+    if (differValue == 1) {
+      return ADVANTAGE_PLAYER1;
+    }
+    return ADVANTAGE_PLAYER2;
+  }
+
+
   public String getScore() {
     return score;
   }

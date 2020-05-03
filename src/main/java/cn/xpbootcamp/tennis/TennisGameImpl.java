@@ -24,17 +24,14 @@ public class TennisGameImpl implements TennisGame {
 
     } else if (score1 >= 4 || score2 >= 4) {
       int differResult = score1 - score2;
-      if (differResult == 1) {
-        return AdvantageScore.ADVANTAGE_PLAYER1.getScore();
-      }
-      if (differResult == -1) {
-        return AdvantageScore.ADVANTAGE_PLAYER2.getScore();
-      }
+
       if (differResult >= 2) {
         return "Win for player1";
       }
-      return "Win for player2";
-
+      if (differResult <= -2) {
+        return "Win for player2";
+      }
+      return AdvantageScore.ofDifferValue(differResult).getScore();
     } else {
 
       StringBuilder score = new StringBuilder();
