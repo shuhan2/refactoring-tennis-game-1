@@ -22,38 +22,39 @@ public class TennisGameImpl implements TennisGame {
   }
 
   public String getScore() {
-    String score = "";
 
     if (m_score1 == m_score2) {
       if (m_score1 < 3) {
-        score = TennisEqualScore.values()[m_score1].getSymbol();
+        return TennisEqualScore.values()[m_score1].getSymbol();
       } else {
-        score = TennisEqualScore.DEFAULT.getSymbol();
+        return TennisEqualScore.DEFAULT.getSymbol();
       }
 
     } else if (m_score1 >= 4 || m_score2 >= 4) {
       int minusResult = m_score1 - m_score2;
       if (minusResult == 1) {
-        score = "Advantage player1";
+        return "Advantage player1";
       } else if (minusResult == -1) {
-        score = "Advantage player2";
+        return "Advantage player2";
       } else if (minusResult >= 2) {
-        score = "Win for player1";
+        return "Win for player1";
       } else {
-        score = "Win for player2";
+        return "Win for player2";
       }
     } else {
+
+      StringBuilder score = new StringBuilder();
       int tempScore;
       for (int i = 1; i < 3; i++) {
         if (i == 1) {
           tempScore = m_score1;
         } else {
-          score += "-";
+          score.append("-");
           tempScore = m_score2;
         }
-        score += Score.values()[tempScore].getSymbol();
+        score.append(Score.values()[tempScore].getSymbol());
       }
+      return score.toString();
     }
-    return score;
   }
 }
