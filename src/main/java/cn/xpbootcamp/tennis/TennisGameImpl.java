@@ -40,15 +40,12 @@ public class TennisGameImpl implements TennisGame {
     } else {
 
       StringBuilder score = new StringBuilder();
-      int tempScore;
       for (int i = 1; i < 3; i++) {
         if (i == 1) {
-          tempScore = player1.getPoint();
+          score.append(Score.values()[player1.getPoint()].getScore());
         } else {
-          score.append("-");
-          tempScore = player2.getPoint();
+          score.append("-").append(Score.values()[player2.getPoint()].getScore());
         }
-        score.append(Score.values()[tempScore].getScore());
       }
       return score.toString();
     }
