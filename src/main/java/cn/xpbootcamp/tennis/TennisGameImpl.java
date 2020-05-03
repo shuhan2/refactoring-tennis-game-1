@@ -3,8 +3,8 @@ package cn.xpbootcamp.tennis;
 
 public class TennisGameImpl implements TennisGame {
 
-  private int m_score1 = 0;
-  private int m_score2 = 0;
+  private int score1 = 0;
+  private int score2 = 0;
   private String player1Name;
   private String player2Name;
 
@@ -15,22 +15,22 @@ public class TennisGameImpl implements TennisGame {
 
   public void wonPoint(String playerName) {
     if (playerName.equals("player1")) {
-      m_score1 += 1;
+      score1 += 1;
     } else {
-      m_score2 += 1;
+      score2 += 1;
     }
   }
 
   public String getScore() {
 
-    if (m_score1 == m_score2) {
-      if (m_score1 < 3) {
-        return TennisEqualScore.values()[m_score1].getSymbol();
+    if (score1 == score2) {
+      if (score1 < 3) {
+        return TennisEqualScore.values()[score1].getSymbol();
       }
       return TennisEqualScore.DEFAULT.getSymbol();
 
-    } else if (m_score1 >= 4 || m_score2 >= 4) {
-      int differResult = m_score1 - m_score2;
+    } else if (score1 >= 4 || score2 >= 4) {
+      int differResult = score1 - score2;
       if (differResult == 1) {
         return AdvantageScore.ADVANTAGE_PLAYER1.getScore();
       }
@@ -40,9 +40,7 @@ public class TennisGameImpl implements TennisGame {
       if (differResult >= 2) {
         return "Win for player1";
       }
-
       return "Win for player2";
-
 
     } else {
 
@@ -50,10 +48,10 @@ public class TennisGameImpl implements TennisGame {
       int tempScore;
       for (int i = 1; i < 3; i++) {
         if (i == 1) {
-          tempScore = m_score1;
+          tempScore = score1;
         } else {
           score.append("-");
-          tempScore = m_score2;
+          tempScore = score2;
         }
         score.append(Score.values()[tempScore].getSymbol());
       }
