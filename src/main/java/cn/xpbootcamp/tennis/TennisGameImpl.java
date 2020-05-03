@@ -23,7 +23,7 @@ public class TennisGameImpl implements TennisGame {
 
   public String getScore() {
     String score = "";
-    int tempScore;
+
     if (m_score1 == m_score2) {
       if (m_score1 < 3) {
         score = TennisEqualScore.values()[m_score1].getSymbol();
@@ -43,6 +43,7 @@ public class TennisGameImpl implements TennisGame {
         score = "Win for player2";
       }
     } else {
+      int tempScore;
       for (int i = 1; i < 3; i++) {
         if (i == 1) {
           tempScore = m_score1;
@@ -50,20 +51,7 @@ public class TennisGameImpl implements TennisGame {
           score += "-";
           tempScore = m_score2;
         }
-        switch (tempScore) {
-          case 0:
-            score += "Love";
-            break;
-          case 1:
-            score += "Fifteen";
-            break;
-          case 2:
-            score += "Thirty";
-            break;
-          case 3:
-            score += "Forty";
-            break;
-        }
+        score += Score.values()[tempScore].getSymbol();
       }
     }
     return score;
