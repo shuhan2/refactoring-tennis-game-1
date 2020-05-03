@@ -12,7 +12,7 @@ public class TennisGameImpl implements TennisGame {
   }
 
   public void wonPoint(String playerName) {
-    if (playerName.equals("player1")) {
+    if (playerName.equals(player1.getName())) {
       player1.setPoint(player1.getPoint() + 1);
     } else {
       player2.setPoint(player2.getPoint() + 1);
@@ -20,7 +20,6 @@ public class TennisGameImpl implements TennisGame {
   }
 
   public String getScore() {
-
     if (player1.getPoint() == player2.getPoint()) {
       if (player1.getPoint() < 3) {
         return TennisEqualScore.values()[player1.getPoint()].getScore();
