@@ -7,7 +7,6 @@ public enum Score {
   THIRTY(2, "Thirty"),
   FORTY(3, "Forty");
 
-
   private int score;
   private String symbol;
 

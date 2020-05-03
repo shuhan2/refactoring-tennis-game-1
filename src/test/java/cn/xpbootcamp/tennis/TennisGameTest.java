@@ -73,7 +73,7 @@ class TennisGameTest {
     @ParameterizedTest
     @MethodSource({"provideScores"})
     public void should_check_all_scores_correctly(TestFixture testFixture) {
-        TennisGame tennisGame = new TennisGameImpl(player1Name, player2Name);
+        TennisGame tennisGame = new TennisGameImpl();
 
         int highestScore = Math.max(testFixture.player1Score, testFixture.player2Score);
         for (int i = 0; i < highestScore; i++) {
