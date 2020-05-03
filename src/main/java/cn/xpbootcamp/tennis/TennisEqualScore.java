@@ -7,15 +7,15 @@ public enum TennisEqualScore {
   THIRTY_ALL(2, "Thirty-All"),
   DEFAULT(3, "Deuce");
 
-  private int score;
-  private String symbol;
+  private int point;
+  private String score;
 
-  TennisEqualScore(int score, String symbol) {
+  TennisEqualScore(int point, String score) {
+    this.point = point;
     this.score = score;
-    this.symbol = symbol;
   }
 
-  public String getSymbol() {
-    return symbol;
+  public String getScore() {
+    return score;
   }
 }

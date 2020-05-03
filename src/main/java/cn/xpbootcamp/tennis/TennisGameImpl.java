@@ -18,9 +18,9 @@ public class TennisGameImpl implements TennisGame {
 
     if (score1 == score2) {
       if (score1 < 3) {
-        return TennisEqualScore.values()[score1].getSymbol();
+        return TennisEqualScore.values()[score1].getScore();
       }
-      return TennisEqualScore.DEFAULT.getSymbol();
+      return TennisEqualScore.DEFAULT.getScore();
 
     } else if (score1 >= 4 || score2 >= 4) {
       int differResult = score1 - score2;
@@ -43,7 +43,7 @@ public class TennisGameImpl implements TennisGame {
           score.append("-");
           tempScore = score2;
         }
-        score.append(Score.values()[tempScore].getSymbol());
+        score.append(Score.values()[tempScore].getScore());
       }
       return score.toString();
     }

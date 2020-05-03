@@ -7,15 +7,15 @@ public enum Score {
   THIRTY(2, "Thirty"),
   FORTY(3, "Forty");
 
-  private int score;
-  private String symbol;
+  private int point;
+  private String score;
 
-  Score(int score, String symbol) {
+  Score(int point, String score) {
+    this.point = point;
     this.score = score;
-    this.symbol = symbol;
   }
 
-  public String getSymbol() {
-    return symbol;
+  public String getScore() {
+    return score;
   }
 }
