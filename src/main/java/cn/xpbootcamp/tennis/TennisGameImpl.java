@@ -26,21 +26,24 @@ public class TennisGameImpl implements TennisGame {
     if (m_score1 == m_score2) {
       if (m_score1 < 3) {
         return TennisEqualScore.values()[m_score1].getSymbol();
-      } else {
-        return TennisEqualScore.DEFAULT.getSymbol();
       }
+      return TennisEqualScore.DEFAULT.getSymbol();
 
     } else if (m_score1 >= 4 || m_score2 >= 4) {
-      int minusResult = m_score1 - m_score2;
-      if (minusResult == 1) {
-        return "Advantage player1";
-      } else if (minusResult == -1) {
-        return "Advantage player2";
-      } else if (minusResult >= 2) {
-        return "Win for player1";
-      } else {
-        return "Win for player2";
+      int differResult = m_score1 - m_score2;
+      if (differResult == 1) {
+        return AdvantageScore.ADVANTAGE_PLAYER1.getScore();
       }
+      if (differResult == -1) {
+        return AdvantageScore.ADVANTAGE_PLAYER2.getScore();
+      }
+      if (differResult >= 2) {
+        return "Win for player1";
+      }
+
+      return "Win for player2";
+
+
     } else {
 
       StringBuilder score = new StringBuilder();
